@@ -5,8 +5,8 @@ import { SymbolWeight, SymbolViewProps } from 'expo-symbols';
 import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
-type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>;
-type IconSymbolName = keyof typeof MAPPING;
+type IconMapping = Record<string, ComponentProps<typeof MaterialIcons>['name']>;
+type IconSymbolName = string;
 
 /**
  * Add your SF Symbols to Material Icons mappings here.
@@ -18,6 +18,22 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'calendar': 'calendar-today',
+  'play.fill': 'play-circle-filled',
+  'person.3.fill': 'group',
+  'bubble.left.and.bubble.right.fill': 'forum',
+  'heart.fill': 'favorite',
+  'checklist': 'checklist',
+  'questionmark.circle.fill': 'help',
+  'xmark': 'close',
+  'ellipsis.vertical': 'more-vert',
+  'line.3.horizontal': 'menu',
+  'person.fill': 'person',
+  'rectangle.portrait.and.arrow.right': 'logout',
+  'arrow.clockwise': 'refresh',
+  'globe': 'language',
+  'sun.max.fill': 'wb-sunny',
+  'moon.fill': 'nightlight-round',
 } as IconMapping;
 
 /**
@@ -37,5 +53,7 @@ export function IconSymbol({
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  // Use the mapped icon if available, otherwise use a default icon
+  const iconName = MAPPING[name] || 'help-outline';
+  return <MaterialIcons color={color} size={size} name={iconName} style={style} />;
 }
